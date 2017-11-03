@@ -25,7 +25,7 @@ def getSignedList(dayTime):
 #从打卡记录检查是否能够打卡
 def canSign(resultList):
 	if len(resultList) == 0:
-		return False
+		return (False, False)
 	first = resultList[0]['signTime']
 	last = resultList[-1]['signTime']
 	firstTime = datetime.strptime(first, '%Y-%m-%d %H:%M')
@@ -35,13 +35,13 @@ def canSign(resultList):
 	standerTime = datetime(now.year, now.month, now.day, 8, 30, 0)
 	standerNoonTime = datetime(now.year, now.month, now.day, 5, 40, 0)
 	if now <= standerNoonTime:
-		return False
+		return (False, False)
 	if lastTime >= standerNoonTime:
-		return False
+		return (False, True)
 	if firstTime <= standerTime:
-		return True
+		return (True, False)
 
-	return False
+	return (False, False)
 
 class Application(tornado.web.Application):
 	def __init__(self):
@@ -65,12 +65,17 @@ class Application(tornado.web.Application):
 		self.timer.start()
 		day = time.strftime('%Y-%m-%d',time.localtime(time.time()))
 		results = getSignedList(day)
-		if canSign(results):
+		canSignObj = canSign(results)
+		av = canSignObj[0]
+		did = canSignObj[1]
+		if av:
 			r = requests.post('http://124.161.16.163:889/mecp/sys/api/mecp/Sign.json', {
 				'userId': userId
 				})
 			if r.json()['rCode'] == "0":
 				self.resultText = "今天打卡成功了"
+		if did:
+			self.resultText = "已经打卡了"
 
 #开启新一天的打卡系统
 	def startSign(self):
