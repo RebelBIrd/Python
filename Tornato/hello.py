@@ -13,8 +13,8 @@ from tornado.options import define, options
 define("port", default=8000, help="run on the given port", type=int)
 
 userId = 'ba8df3fe0fe84572a76e13616dcba042'
-bigTimerInterval = 600
-smallTimerInterval = 200
+bigTimerInterval = 5
+smallTimerInterval = 1
 #获取一天打卡记录
 def getSignedList(dayTime):
 	r = requests.post('http://124.161.16.163:889/mecp/sys/api/mecp/getSignList.json', {
@@ -33,7 +33,7 @@ def canSign(resultList):
 
 	now = datetime.now()
 	standerTime = datetime(now.year, now.month, now.day, 8, 30, 0)
-	standerNoonTime = datetime(now.year, now.month, now.day, 5, 40, 0)
+	standerNoonTime = datetime(now.year, now.month, now.day, 17, 38, 0)
 	if now <= standerNoonTime:
 		return (False, False)
 	if lastTime >= standerNoonTime:
@@ -68,6 +68,7 @@ class Application(tornado.web.Application):
 		canSignObj = canSign(results)
 		av = canSignObj[0]
 		did = canSignObj[1]
+		print(canSignObj)
 		if av:
 			r = requests.post('http://124.161.16.163:889/mecp/sys/api/mecp/Sign.json', {
 				'userId': userId
