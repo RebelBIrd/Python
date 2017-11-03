@@ -46,7 +46,8 @@ def canSign(resultList):
 class Application(tornado.web.Application):
 	def __init__(self):
 		handlers = [(r"/cancle", WordHandler),
-					(r"/r", SignResult)]
+					(r"/r", SignResult),
+					(r"/", WelComePage)]
 
 		self.isRunning = True
 		self.resultText = "今天还没打卡"
@@ -109,6 +110,11 @@ class SignResult(tornado.web.RequestHandler):
 	def get(self):
 		result = self.application.resultText
 		self.write("<h1>%s</h1>" % result)
+class WelComePage(tornado.web.RequestHandler):
+	"""docstring for  WelComePage"""
+	def get(self):
+		self.write("<h1>欢迎光临大黄的自动签到</h1><br/><h3>r指令显示签到结果</h3>")
+		
 
 if __name__ == '__main__':
 	tornado.options.parse_command_line()
