@@ -29,7 +29,7 @@ end
 # unset irrelevant variables
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/Users/rebel/Documents/openResource/python/Tornato/env"
+set -gx VIRTUAL_ENV "/Users/rebel/Documents/openResource/python/Python/Tornato/env"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH
