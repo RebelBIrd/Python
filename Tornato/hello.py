@@ -57,6 +57,7 @@ class Application(tornado.web.Application):
 
 		self.startTimer = threading.Timer(bigTimerInterval, self.startSign)
 		self.startTimer.start()
+		self.checkAndSign();
 
 		tornado.web.Application.__init__(self, handlers, debug=True)
 #检查并打卡
