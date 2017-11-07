@@ -110,6 +110,7 @@ class WordHandler(tornado.web.RequestHandler):
 		timer = self.application.timer
 		timer.cancel()
 		self.application.isRunning = False
+		self.application.resultText = "今天的自动打卡已经取消了"
 		self.write("<h1>取消今天的自动打卡</h1>")
 #查询打卡结果
 class SignResult(tornado.web.RequestHandler):
