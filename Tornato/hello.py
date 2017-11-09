@@ -14,7 +14,7 @@ define("port", default=8000, help="run on the given port", type=int)
 
 userId = 'ba8df3fe0fe84572a76e13616dcba042'
 bigTimerInterval = 1800
-smallTimerInterval = 600
+smallTimerInterval = 300
 #获取一天打卡记录
 def getSignedList(dayTime):
 	r = requests.post('http://124.161.16.163:889/mecp/sys/api/mecp/getSignList.json', {
@@ -57,11 +57,12 @@ class Application(tornado.web.Application):
 
 		self.startTimer = threading.Timer(bigTimerInterval, self.startSign)
 		self.startTimer.start()
-		self.checkAndSign();
+		# self.checkAndSign();
 
 		tornado.web.Application.__init__(self, handlers, debug=True)
 #检查并打卡
 	def checkAndSign(self):
+		print("checkt")
 		self.timer = threading.Timer(smallTimerInterval, self.checkAndSign)
 		self.timer.start()
 		day = time.strftime('%Y-%m-%d',time.localtime(time.time()))
