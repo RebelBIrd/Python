@@ -7,6 +7,8 @@ import requests
 import time
 import json
 
+from boomer import sendMsg2SB
+
 from datetime import datetime
 
 from tornado.options import define, options
@@ -112,6 +114,7 @@ class Application(tornado.web.Application):
 		if (now >= stander0Time) and (now <= standerTime):
 			self.resultText = "小小姑娘，清早起床。"
 		print('time run')
+		sendMsg2SB()
 # 打卡定时器如果在运行就啥也不干
 		if self.isRunning:
 			print('timer alive')
