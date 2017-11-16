@@ -4,12 +4,10 @@ import test
 PHONE = '17508249247'
 
 GET_URLS = [
-	'http://dev.meclass.com/smsauth/codesend?platform=android&sms_auth_type=Registration&sms_phone_number=15680962829&version=3.0.9',
-	'http://mobile.meclass.com/smsauth/codesend?platform=android&sms_auth_type=Registration&sms_phone_number=15680962829&version=3.0.9',
+	'http://mobile.meclass.com/smsauth/codesend?platform=android&sms_auth_type=Registration&sms_phone_number=%s&version=3.0.9' % PHONE,
 	
 ]
 GET_REFERER = [
-	'',
 	'',
 ]
 
