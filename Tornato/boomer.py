@@ -22,7 +22,7 @@ POST_DATAS = [
 	{ 'mobile': PHONE },
 	{ 'lat': '39', 'lng': '116', 'simulate_mobile': 'true', 'asid': '5a0ce6b68e5ab4201', '_r': '0.9357775703859941', 'reflogid': '5a0ce73a582ea4151', 'location_hash': 'b58a9feeq8Tw2iXiJB/ZHsxzjaVSXl1YaUmISk3KiuV83Pwu82d1Dqlm6B4mYpiNKHkslyqRS0d1nlfCuxwHBJ8S81', 'phone': PHONE, 'voice': 0 },
 	{ 'cmd': 'checkCacctNew', 'cacct': PHONE, 'acctType': 1 },
-	{ 'mobile': PHONE }
+	{ 'mobile': PHONE },
 	{ 'a': 'SendMSG', 't': 2, 'mo': PHONE }
 ]
 
@@ -44,7 +44,6 @@ def sendMsg2SB():
 
 		body = POST_DATAS[index]
 		r = requests.post(url, params=body, headers=headers)
-		print(r.status_code)
 
 	index = -1
 	for url in GET_URLS:
