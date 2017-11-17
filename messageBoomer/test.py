@@ -1,0 +1,2 @@
+def gaogao():
+	print('yigebing')

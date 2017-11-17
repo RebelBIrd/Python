@@ -149,7 +149,7 @@ class SignResult(tornado.web.RequestHandler):
 class WelComePage(tornado.web.RequestHandler):
 	"""docstring for  WelComePage"""
 	def get(self):
-		self.write("<h1>欢迎光临大黄的自动签到</h1><br/><h3>r指令显示签到结果</h3>")
+		self.write("<h3>r指令显示签到结果</h3>")
 		
 
 if __name__ == '__main__':
