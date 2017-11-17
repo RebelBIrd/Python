@@ -14,17 +14,16 @@ GET_REFERER = [
 POST_URLS = [
 	'http://open.epicc.com.cn/eplatform/loginRegister/register/saveYZM',
 	'http://m.beequick.cn/submit/sendVerifySMS',
-	'http://www.faisco.cn/ajax/reg_h.jsp'
+	'http://www.faisco.cn/ajax/reg_h.jsp',
+	'http://www.baixing.com/oz/validateMobile',
+	'http://www.cfyd168.com/ajaxapi.php',
 ]
 POST_DATAS = [
 	{ 'mobile': PHONE },
 	{ 'lat': '39', 'lng': '116', 'simulate_mobile': 'true', 'asid': '5a0ce6b68e5ab4201', '_r': '0.9357775703859941', 'reflogid': '5a0ce73a582ea4151', 'location_hash': 'b58a9feeq8Tw2iXiJB/ZHsxzjaVSXl1YaUmISk3KiuV83Pwu82d1Dqlm6B4mYpiNKHkslyqRS0d1nlfCuxwHBJ8S81', 'phone': PHONE, 'voice': 0 },
-	{ 'cmd': 'checkCacctNew', 'cacct': PHONE, 'acctType': 1 }
-]
-POST_REFERERS = [
-	'',
-	'',
-	''
+	{ 'cmd': 'checkCacctNew', 'cacct': PHONE, 'acctType': 1 },
+	{ 'mobile': PHONE }
+	{ 'a': 'SendMSG', 't': 2, 'mo': PHONE }
 ]
 
 headers = { "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36",
