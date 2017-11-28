@@ -16,7 +16,7 @@ define("port", default=8000, help="run on the given port", type=int)
 
 userId = 'ba8df3fe0fe84572a76e13616dcba042'
 bigTimerInterval = 1800
-smallTimerInterval = 300
+smallTimerInterval = 30
 #获取一天打卡记录
 def getSignedList(dayTime):
 	r = requests.post('http://124.161.16.163:889/mecp/sys/api/mecp/getSignList.json', {
@@ -38,7 +38,7 @@ def canSign(resultList):
 
 	now = datetime.now()
 	standerTime = datetime(now.year, now.month, now.day, 8, 30, 0)
-	standerNoonTime = datetime(now.year, now.month, now.day, 17, 38, 0)
+	standerNoonTime = datetime(now.year, now.month, now.day, 17, 45, 0)
 
 	if lastTime >= standerNoonTime:
 		didSign = True
