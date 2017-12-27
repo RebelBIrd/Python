@@ -6,6 +6,7 @@ import threading
 import requests
 import time
 import json
+import random
 
 from datetime import datetime
 
@@ -37,7 +38,7 @@ class TodayProfit(tornado.web.RequestHandler):
 				'sum': 31585,
 				'date': '2017.10.22',
 				'presents': [
-				    { 'name': '网络销售', 'sum': 6511 },
+				    { 'name': '网络销售', 'sum': random.randint(1000, 5000) },
 				    { 'name': '传销', 'sum': 4551 },
 				    { 'name': '强卖', 'sum': 8786 },
 				    { 'name': '门店销售', 'sum': 936 },
