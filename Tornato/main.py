@@ -138,9 +138,9 @@ class Cableway(tornado.web.RequestHandler):
 		self.finish({
 				'code': 1,
 				'result': {
-			        'sumTicket': 10010,
-			        'minTicket': 110,
-			        'maxTicket': 911,
+			        'sumTicket': random.randint(4000, 6000),
+			        'minTicket': random.randint(200,1000),
+			        'maxTicket': random.randint(2000, 4000),
     			}
 			})
 
@@ -257,14 +257,23 @@ class OuterCityPercent(tornado.web.RequestHandler):
 
 class ParkInfomation(tornado.web.RequestHandler):
 	def get(self):
+		car1total = random.randint(5000, 7000)
+		car1used = random.randint(3000, 4000)
+		car1rest = car1total - car1used
+		car2total = random.randint(5000, 7000)
+		car2used = random.randint(3000, 4000)
+		car2rest = car1total - car1used
+		car3total = random.randint(5000, 7000)
+		car3used = random.randint(3000, 4000)
+		car3rest = car1total - car1used
 		self.finish({
 				'code': 1,
 				'result': [
 					{ 
 					'parkName': '九道口停车场',
-					'total': 9527,
-					'used': 4527,
-					'rest': 5000,
+					'total': car1total,
+					'used': car1used,
+					'rest': car1rest,
 					'detail': [
 							{ 'name': '阎王殿卡口', 'data': [1080, 2048] },
 							{ 'name': '南天门卡口', 'data': [526, 346] },
@@ -274,9 +283,9 @@ class ParkInfomation(tornado.web.RequestHandler):
 					},
 					{ 
 					'parkName': '沙坪坝停车场',
-					'total': 999,
-					'used': 333,
-					'rest': 666,
+					'total': car2total,
+					'used': car2used,
+					'rest': car2rest,
 					'detail': [
 							{ 'name': '广寒宫卡口', 'data': [545, 9578958] },
 							{ 'name': '琼花宫卡口', 'data': [526, 346] },
@@ -286,9 +295,9 @@ class ParkInfomation(tornado.web.RequestHandler):
 					},
 					{ 
 					'parkName': '石碾盘停车场',
-					'total': 1111,
-					'used': 110,
-					'rest': 1001,
+					'total': car3total,
+					'used': car3used,
+					'rest': car3rest,
 					'detail': [
 							{ 'name': '遣云宫卡口', 'data': [123, 2048] },
 							{ 'name': '毗沙宫卡口', 'data': [5124, 5124] },
