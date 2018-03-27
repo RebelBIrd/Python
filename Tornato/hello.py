@@ -11,7 +11,7 @@ import json
 from datetime import datetime
 
 from tornado.options import define, options
-define("port", default=8000, help="run on the given port", type=int)
+define("port", default=8081, help="run on the given port", type=int)
 
 userId = 'ba8df3fe0fe84572a76e13616dcba042'
 bigTimerInterval = 1800
@@ -83,7 +83,7 @@ class Application(tornado.web.Application):
 				'userId': userId,
 				'address': address,
 				'isOut': isOut,
-				'lat': lat
+				'lat': lat,
 				'lon': lon
 				})
 			if r.json()['rCode'] == "0":
@@ -110,7 +110,7 @@ class Application(tornado.web.Application):
 				'userId': userId,
 				'address': address,
 				'isOut': isOut,
-				'lat': lat
+				'lat': lat,
 				'lon': lon
 				})
 			if r.json()['rCode'] == "0":
