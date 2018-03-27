@@ -7,7 +7,6 @@ import requests
 import time
 import json
 
-from boomer import sendMsg2SB
 
 from datetime import datetime
 
@@ -16,7 +15,11 @@ define("port", default=8000, help="run on the given port", type=int)
 
 userId = 'ba8df3fe0fe84572a76e13616dcba042'
 bigTimerInterval = 1800
-smallTimerInterval = 30
+smallTimerInterval = 120
+address = '川大智胜'
+isOut = 'false'
+lon = '103.996615'
+lat = '30.63315'
 #获取一天打卡记录
 def getSignedList(dayTime):
 	r = requests.post('http://124.161.16.163:889/mecp/sys/api/mecp/getSignList.json', {
@@ -55,7 +58,8 @@ class Application(tornado.web.Application):
 	def __init__(self):
 		handlers = [(r"/cancle", WordHandler),
 					(r"/r", SignResult),
-					(r"/", WelComePage)]
+					(r"/", WelComePage),
+					(r"/s", DoSign)]
 
 		self.isRunning = True
 		self.resultText = "刚启动，等会儿！"
@@ -76,7 +80,11 @@ class Application(tornado.web.Application):
 			self.resultText = "时刻准备着为下午打卡"
 		if shouldSign:
 			r = requests.post('http://124.161.16.163:889/mecp/sys/api/mecp/Sign.json', {
-				'userId': userId
+				'userId': userId,
+				'address': address,
+				'isOut': isOut,
+				'lat': lat
+				'lon': lon
 				})
 			if r.json()['rCode'] == "0":
 				self.resultText = "完成了一天的打卡工作"
@@ -99,7 +107,11 @@ class Application(tornado.web.Application):
 			self.resultText = "时刻准备着为下午打卡"
 		if shouldSign:
 			r = requests.post('http://124.161.16.163:889/mecp/sys/api/mecp/Sign.json', {
-				'userId': userId
+				'userId': userId,
+				'address': address,
+				'isOut': isOut,
+				'lat': lat
+				'lon': lon
 				})
 			if r.json()['rCode'] == "0":
 				self.resultText = "完成了一天的打卡工作"
@@ -113,8 +125,6 @@ class Application(tornado.web.Application):
 		stander0Time = datetime(now.year, now.month, now.day, 1, 0, 0)
 		if (now >= stander0Time) and (now <= standerTime):
 			self.resultText = "小小姑娘，清早起床。"
-		print('time run')
-		sendMsg2SB()
 # 打卡定时器如果在运行就啥也不干
 		if self.isRunning:
 			print('timer alive')
@@ -146,6 +156,14 @@ class SignResult(tornado.web.RequestHandler):
 	def get(self):
 		result = self.application.resultText
 		self.write("<h1>%s</h1>" % result)
+class DoSign(tornado.web.RequestHandler):
+	def get(self):
+		r = requests.post('http://124.161.16.163:889/mecp/sys/api/mecp/Sign.json', {
+				'userId': userId
+			})
+		if r.json()['rCode'] == "0":
+			self.write("<h1>主动签到成功</h1>")
+
 class WelComePage(tornado.web.RequestHandler):
 	"""docstring for  WelComePage"""
 	def get(self):
